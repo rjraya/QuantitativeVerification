@@ -1,0 +1,25 @@
+dtmc
+
+// declare variable and constants
+// number of computers that are on the network
+const int M = 60000;
+// number of possible addresses
+const int K = 65024;
+// probability of loosing packets
+const double p = 0.1;
+// probability to choose and already existing address
+const double q = M/K;
+// numbers for the states
+const int err = 5;
+const int succ = 6;
+// we create a new module
+module zero
+ s : [0..6] init 0;
+ // write transitions 
+ // [name] would name the transition
+ [] (s = 0) -> q : (s' = 1) + (1-q) : (s' = succ);
+ [] (s = 1) -> p : (s' = 2) + (1-p) : (s' = 0);
+ [] (s = 2) -> p : (s' = 3) + (1-p) : (s' = 0);
+ [] (s = 3) -> p : (s' = 4) + (1-p) : (s' = 0);
+ [] (s = 4) -> p : (s' = err) + (1-p) : (s' = 0);
+endmodule

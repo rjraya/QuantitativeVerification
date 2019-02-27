@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>// Place global declarations here.
+int[0,1] req1,req2; 
+int[1,2] turn;</declaration><template><name x="5" y="5">mutex</name><parameter>const int[1,2] me , int[0,1]&amp; req_self , int[0,1]&amp; req_other</parameter><declaration>// Place local declarations here.
+</declaration><location id="id0" x="16" y="104"><name x="-24" y="104">CS</name></location><location id="id1" x="240" y="112"><name x="264" y="112">wait</name></location><location id="id2" x="240" y="-48"><name x="264" y="-80">want</name></location><location id="id3" x="16" y="-40"><name x="-16" y="-80">idle</name></location><init ref="id3"/><transition><source ref="id0"/><target ref="id3"/><label kind="assignment" x="-72" y="24">req_self = 0</label></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="80" y="32">turn == me</label><nail x="104" y="56"/></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="72" y="152">req_other == 0</label><nail x="104" y="152"/></transition><transition><source ref="id2"/><target ref="id1"/><label kind="assignment" x="256" y="24">turn = (me==1?2:1)</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="assignment" x="88" y="-72">req_self = 1</label></transition></template><system>P1 = mutex(1, req1, req2);
+P2 = mutex(2, req2, req1);
+
+system P1,P2;</system></nta>

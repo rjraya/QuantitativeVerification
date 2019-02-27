@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'><nta><declaration>const int delay = 5;
+int id = 0;</declaration><template><name x="5" y="5">P</name><parameter>const int pid</parameter><declaration>clock x;</declaration><location id="id0" x="-144" y="24"><name x="-152" y="40">cs</name><label kind="invariant" x="-208" y="56">x &lt;= 3 * delay</label></location><location id="id1" x="72" y="24"><name x="56" y="40">wait</name><label kind="invariant" x="32" y="56">x &lt;= delay</label></location><location id="id2" x="72" y="-112"><name x="62" y="-142">request</name><label kind="invariant" x="62" y="-97">x &lt;= 1</label></location><location id="id3" x="-144" y="-112"></location><init ref="id3"/><transition><source ref="id1"/><target ref="id3"/><label kind="guard" x="-96" y="-56">x == delay &amp;&amp; id != pid</label></transition><transition><source ref="id1"/><target ref="id0"/><label kind="guard" x="-120" y="24">x == delay &amp;&amp; id == pid</label><label kind="assignment" x="-56" y="40">x = 0</label></transition><transition><source ref="id0"/><target ref="id3"/><label kind="assignment" x="-248" y="-48">id = 0, x = 0</label></transition><transition><source ref="id2"/><target ref="id1"/><label kind="assignment" x="80" y="-56">id = pid,
+x = 0</label></transition><transition><source ref="id3"/><target ref="id2"/><label kind="guard" x="-72" y="-136">id == 0</label><label kind="assignment" x="-64" y="-128">x = 0</label></transition></template><system>p1 = P(1);
+p2 = P(2);
+p3 = P(3);
+/*p4 = P(4);
+p5 = P(5);
+p6 = P(6);
+p7 = P(7);
+p8 = P(8);
+p9 = P(9);
+p10 = P(10);
+
+system p1, p2, p3, p4, p5, p6, p7, p8, p9, p10; */
+system p1, p2, p3;</system></nta>

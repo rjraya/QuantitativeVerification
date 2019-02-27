@@ -1,0 +1,25 @@
+dtmc
+
+//-------------------------------------------------------------
+// VARIABLES
+const int M = 10;
+const int K = 65024;
+const double loss = 0.1; // probability of message loss
+
+// PROBABILITIES
+const double used = M/K; // probability pick an ip address being used
+const double new = (1-used); // probability pick a new ip address
+
+// SPECIAL STATES
+const int success = 6;
+const int error = 5;
+
+//-------------------------------------------------------------
+module zeroconf
+	s : [0..7] init 0;
+	[] (s=0) -> used:(s'=1) + new:(s'=success);
+	[] (s=1) -> loss:(s'=2) + (1-loss):(s'=0);
+	[] (s=2) -> loss:(s'=3) + (1-loss):(s'=0);
+	[] (s=3) -> loss:(s'=4) + (1-loss):(s'=0);
+	[] (s=4) -> loss:(s'=error) + (1-loss):(s'=0);
+endmodule

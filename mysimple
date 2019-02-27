@@ -1,0 +1,27 @@
+// PTA used as running example in FORMATS'09 paper
+
+pta
+
+const int n;
+
+module M
+
+	s : [0..2];
+	x : clock; 
+ 
+        invariant
+         (s = 0 => x <= 2) &
+         (s = 1 => x <= 3)
+        endinvariant
+  
+        [send] s = 0 & x >= 1 -> 0.9 : (s' = 2) + 0.1 : (s' = 1) & (x' = 0);
+        [] s = 1 & x >= 2 -> 0.95 : (s' = 2) + 0.05 : (s' = 1);
+endmodule
+	
+
+label "success" = s=2;
+
+rewards "time"
+	true : 1;
+endrewards
+
